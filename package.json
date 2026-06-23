@@ -1,0 +1,35 @@
+{
+  "name": "omie-supabase-sync",
+  "version": "1.0.0",
+  "description": "Sync Omie ERP data to Supabase automatically",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "sync:once": "node src/sync.js",
+    "sync:full": "node src/sync.js --full",
+    "sync:clients": "node scripts/sync-single.js clients",
+    "sync:orders": "node scripts/sync-single.js orders",
+    "sync:finance": "node scripts/sync-single.js receivable payable",
+    "sync:services": "node scripts/sync-single.js services",
+    "sync:crm": "node scripts/sync-single.js crm_opportunities crm_activities",
+    "tables:list": "node scripts/sync-tables.js list",
+    "tables:sync": "node scripts/sync-tables.js sync",
+    "tables:sync:critical": "node scripts/sync-tables.js sync --tier critical",
+    "tables:sync:phase1": "node scripts/sync-tables.js sync --phase 1",
+    "db:generate-schema": "node scripts/generate-schema.js > config/schema.sql",
+    "logs": "node scripts/show-logs.js",
+    "setup:db": "node scripts/setup-db.js"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.39.0",
+    "axios": "^1.6.0",
+    "axios-retry": "^4.0.0",
+    "dotenv": "^16.3.1",
+    "node-cron": "^3.0.3",
+    "winston": "^3.11.0",
+    "winston-daily-rotate-file": "^4.7.1"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
