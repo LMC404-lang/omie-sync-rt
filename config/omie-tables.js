@@ -1091,7 +1091,7 @@ const TABLES = [
     endpoint: 'financas/mf',
     action: 'ListarMovimentos',
     listKey: 'movimentos',
-    idFields: ['detalhes.nCodTitulo'],
+    idFields: [['detalhes.nCodTitulo', 'detalhes.cNumParcela']],
     paginationStyle: 'new',
     sinceDateField: 'dDtPagtoDe',
     sinceEndDateField: 'dDtPagtoAte',

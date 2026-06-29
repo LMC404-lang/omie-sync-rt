@@ -164,6 +164,14 @@ function castValue(rawValue, type) {
 function resolveId(record, idFields, pkType, hashSeed = '') {
   const candidates = [...(idFields || []), ...FALLBACK_ID_FIELDS];
   for (const field of candidates) {
+    // Composite key: an array entry means "concatenate these fields".
+    // Used when a single field (e.g. nCodTitulo) is shared by multiple
+    // rows (e.g. one per parcela/movimento) and is not unique alone.
+    if (Array.isArray(field)) {
+      const parts = field.map((f) => getPath(record, f));
+      if (parts.some((p) => isBlank(p))) continue; // need all parts present
+      return parts.map((p) => String(p)).join('|');
+    }
     const value = getPath(record, field);
     if (!isBlank(value)) {
       if (pkType === 'bigint') {
